@@ -7,6 +7,7 @@ function App() {
     <div className="app">
       <SideBar />
       <Feed />
+      
     </div>
   );
 }
