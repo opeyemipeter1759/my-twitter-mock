@@ -1,5 +1,6 @@
 import React from "react";
-import "./SideBar";
+import "./SideBar.css";
+import SidebarOption from "./SidebarOption";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,14 +10,13 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-
-import SidebarOption from "./SidebarOption";
+import { Button } from "@material-ui/core";
 
 function SideBar() {
   return (
     <div className="sidebar">
       <TwitterIcon />
-      <SidebarOption Icons={HomeIcon} text="Home" />
+      <SidebarOption active Icons={HomeIcon} text="Home" />
       <SidebarOption Icons={SearchIcon} text="Explore" />
       <SidebarOption Icons={NotificationsNoneIcon} text="Notifications" />
       <SidebarOption Icons={MailOutlineIcon} text="Messages" />
@@ -25,6 +25,10 @@ function SideBar() {
       <SidebarOption Icons={PermIdentityIcon} text="Profile" />
 
       <SidebarOption Icons={MoreHorizIcon} text="More" />
+
+      <Button variant="outlined" className="sidebar__tweet" fullWidth>
+        Tweet
+      </Button>
     </div>
   );
 }
