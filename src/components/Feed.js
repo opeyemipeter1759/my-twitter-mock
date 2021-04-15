@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./feed.css";
 import Post from "./Post";
 import TweetBox from "./TweetBox";
+import dataStore from "./firebase";
 function Feed() {
-  const [posts, setPosts] = useState( [] );
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    dataStore
+      .collection("post")
+      .onSnapshot((snapshot) =>
+        setPosts(snapshot.docs.map((doc) => doc.data()))
+      );
+  }, []);
   return (
     <div className="feed">
       <div className="feed__header">
         <h2>Home</h2>
       </div>
       <TweetBox />
-      <Post
-        displayName="Opeyemi Peter"
-        username="opeyemiPita"
-        verified={true}
-        text="testing the mock out."
-        avatar="https://pbs.twimg.com/profile_images/1354923801318993921/3zauGbYS_400x400.jpg"
-        image="https://media.giphy.com/media/xTiTnfRe5cfu5OR08U/source.gif"
-      />
+      {posts.map((post) => (
+        <Post
+          displayName={post.displayName}
+          username={post.username}
+          verified={post.verified}
+          text={post.text}
+          avatar={post.avatar}
+          image={post.image}
+        />
+      ))}
     </div>
   );
 }
